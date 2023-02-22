@@ -6,6 +6,7 @@
 #include "concrete_creator2.hpp"
 
 #include <iostream>
+#include <memory>
 
 /**
  * The client code works with an instance of a concrete creator, albeit through
@@ -23,14 +24,12 @@ void ClientCode(const Creator &creator)
 int main(int argc, char **argv)
 {
    std::cout << "App: Launched with the ConcreteCreator1.\n";
-   Creator *creator = new ConcreteCreator1();
-   ClientCode(*creator);
+   std::unique_ptr<Creator> product_1 = std::make_unique<ConcreteCreator1>();
+   ClientCode(*product_1);
    std::cout << std::endl;
    std::cout << "App: Launched with the ConcreteCreator2.\n";
-   Creator *creator2 = new ConcreteCreator2();
-   ClientCode(*creator2);
+   std::unique_ptr<Creator> product_2 = std::make_unique<ConcreteCreator2>();
+   ClientCode(*product_2);
 
-   delete creator;
-   delete creator2;
    return 0;
 }

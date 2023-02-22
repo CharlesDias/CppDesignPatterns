@@ -3,6 +3,8 @@
 #include "creator.hpp"
 #include "concrete_product1.hpp"
 
+#include <memory>
+
 /**
  * Concrete Creators override the factory method in order to change the
  * resulting product's type.
@@ -15,8 +17,8 @@ class ConcreteCreator1 : public Creator
     * way the Creator can stay independent of concrete product classes.
     */
 public:
-   Product *FactoryMethod() const override
+   std::unique_ptr<Product> FactoryMethod() const override
    {
-      return new ConcreteProduct1();
-   }
+      return std::make_unique<ConcreteProduct1>();
+   }   
 };

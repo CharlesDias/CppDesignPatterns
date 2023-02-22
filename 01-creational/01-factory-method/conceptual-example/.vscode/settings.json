@@ -1,6 +1,7 @@
 {
    "sonarlint.pathToCompileCommands": "${workspaceFolder}/build/compile_commands.json",
    "files.associations": {
-      "creator.hpp": "c"
+      "creator.hpp": "c",
+      "ostream": "cpp"
    }
 }
