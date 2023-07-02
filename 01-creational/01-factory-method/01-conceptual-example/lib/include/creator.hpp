@@ -1,6 +1,6 @@
 #pragma once
 
-#include "product.hpp"
+#include "i_product.hpp"
 
 #include <iostream>
 #include <memory>
@@ -20,9 +20,9 @@ public:
    virtual ~Creator() = default;
 
    /** 
-    * Pure virtual function. Any object can be create directly from this class
-    * can not. */
-   virtual std::unique_ptr<Product> FactoryMethod() const = 0;
+    * Pure virtual function.
+    * No objects can be created directly from this class. */
+   virtual std::unique_ptr<IProduct> factoryMethod() const = 0;
 
    /**
     * Also note that, despite its name, the Creator's primary responsibility is
@@ -34,10 +34,10 @@ public:
    std::string SomeOperation() const
    {
       // Call the factory method to create a Product object.
-      std::unique_ptr<Product> product = this->FactoryMethod();
+      std::unique_ptr<IProduct> product = this->factoryMethod();
 
       // Now, use the product.
-      std::string result = "Creator: The same creator's code has just worked with " + product->Operation();
+      std::string result = "Creator: The same creator's code has just worked with " + product->operation();
 
       return result;
    }

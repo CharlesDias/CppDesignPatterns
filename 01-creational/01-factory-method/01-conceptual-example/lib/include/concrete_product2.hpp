@@ -1,15 +1,15 @@
 #pragma once
 
-#include "product.hpp"
+#include "i_product.hpp"
 
 #include <iostream>
 #include <string>
 
-class ConcreteProduct2 : public Product
+class ConcreteProduct2 : public IProduct
 {
 public:
-   std::string Operation() const override
+   std::string operation() const override
    {
-      return "{Result of the ConcreteProduct2}"; 
+      return "{Do stuff on the ConcreteProduct2}"; 
    }
 };

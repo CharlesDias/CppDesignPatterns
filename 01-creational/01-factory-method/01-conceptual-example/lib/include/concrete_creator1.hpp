@@ -17,8 +17,8 @@ class ConcreteCreator1 : public Creator
     * way the Creator can stay independent of concrete product classes.
     */
 public:
-   std::unique_ptr<Product> FactoryMethod() const override
+   std::unique_ptr<IProduct> factoryMethod() const override
    {
       return std::make_unique<ConcreteProduct1>();
-   }   
+   }
 };

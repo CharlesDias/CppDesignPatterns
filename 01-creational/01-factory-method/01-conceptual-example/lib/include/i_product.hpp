@@ -7,7 +7,7 @@
  * The Product interface declares the operations that all concrete products must
  * implement.
  */
-class Product
+class IProduct
 {
 public:
    /**
@@ -15,10 +15,10 @@ public:
     * class is destructed properly, i.e., both base class and derived class destructors
     * are called.
     */
-   virtual ~Product() = default;
+   virtual ~IProduct() = default;
 
    /** 
-    * Pure virtual function. Any object can be create directly from this class
-    * can not. */
-   virtual std::string Operation() const = 0; // Pure virtual function.
+    * Pure virtual function. 
+    * No objects can be created directly from this class. */
+   virtual std::string operation() const = 0; // Pure virtual function.
 };

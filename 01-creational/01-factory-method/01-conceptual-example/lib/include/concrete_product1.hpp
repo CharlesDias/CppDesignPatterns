@@ -1,6 +1,6 @@
 #pragma once
 
-#include "product.hpp"
+#include "i_product.hpp"
 
 #include <iostream>
 #include <string>
@@ -8,11 +8,11 @@
 /**
  * Concrete Products provide various implementations of the Product interface.
  */
-class ConcreteProduct1 : public Product
+class ConcreteProduct1 : public IProduct
 {
 public:
-   std::string Operation() const override
+   std::string operation() const override
    {
-      return "{Result of the ConcreteProduct1}";
+      return "{Do stuff on the ConcreteProduct1}";
    }
 };
