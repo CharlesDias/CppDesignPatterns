@@ -53,8 +53,6 @@ Creator <|-- ConcreteCreator1
 Creator <|-- ConcreteCreator2
 
 @enduml
-
-@enduml
 ```
 
 #### UART and USB example
