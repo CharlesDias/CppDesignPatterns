@@ -56,17 +56,22 @@ private:
     std::unique_ptr<Adaptee> m_adaptee;
 };
 
-void ClientCode(const Target *target)
+class Client
 {
-    std::cout << target->request();
-}
+public:
+    void code(const Target *target)
+    {
+        std::cout << target->request();
+    }
+};
 
 int main(int argc, char **argv)
 {
+    Client client;
     std::cout << "Client: I can work just fine with the Target objects:\n";
     // Target *target = new Target;
     std::unique_ptr<Target> target = std::make_unique<Target>();
-    ClientCode(target.get());
+    client.code(target.get());
     std::cout << "\n\n";
 
     // Adaptee *adaptee = new Adaptee;
@@ -78,7 +83,7 @@ int main(int argc, char **argv)
     
     // Adapter *adapter = new Adapter(adaptee);
     std::unique_ptr<Adapter> adapter = std::make_unique<Adapter>(std::move(adaptee));
-    ClientCode(adapter.get());
+    client.code(adapter.get());
     std::cout << "\n";
 
     // delete target;
