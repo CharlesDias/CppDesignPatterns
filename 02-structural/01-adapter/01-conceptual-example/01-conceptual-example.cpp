@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <algorithm> // std::reverse
+#include <memory> // smart pointers
 
 /**
  * This is the Target class, which represents the interface your code understands.
@@ -40,7 +41,8 @@ public:
 class Adapter : public Target
 {
 public:
-    Adapter(Adaptee* adaptee) : m_adaptee(adaptee) {}
+    // Adapter(Adaptee* adaptee) : m_adaptee(adaptee) {}
+    Adapter(std::unique_ptr<Adaptee> adaptee) : m_adaptee(std::move(adaptee)) {}
 
     std::string request() const override
     {
@@ -50,7 +52,8 @@ public:
     }
 
 private:
-    Adaptee* m_adaptee;
+    // Adaptee* m_adaptee;
+    std::unique_ptr<Adaptee> m_adaptee;
 };
 
 void ClientCode(const Target *target)
@@ -61,23 +64,26 @@ void ClientCode(const Target *target)
 int main(int argc, char **argv)
 {
     std::cout << "Client: I can work just fine with the Target objects:\n";
-    Target *target = new Target;
-    ClientCode(target);
+    // Target *target = new Target;
+    std::unique_ptr<Target> target = std::make_unique<Target>();
+    ClientCode(target.get());
     std::cout << "\n\n";
 
-    Adaptee *adaptee = new Adaptee;
+    // Adaptee *adaptee = new Adaptee;
+    std::unique_ptr<Adaptee> adaptee = std::make_unique<Adaptee>();
     std::cout << "Client: The Adaptee class has a weird interface. See, I don't understand it:\n";
     std::cout << "Adaptee: " << adaptee->specificRequest();
     std::cout << "\n\n";
     std::cout << "Client: But I can work with it via the Adapter:\n";
     
-    Adapter *adapter = new Adapter(adaptee);
-    ClientCode(adapter);
+    // Adapter *adapter = new Adapter(adaptee);
+    std::unique_ptr<Adapter> adapter = std::make_unique<Adapter>(std::move(adaptee));
+    ClientCode(adapter.get());
     std::cout << "\n";
 
-    delete target;
-    delete adaptee;
-    delete adapter;
+    // delete target;
+    // delete adaptee;
+    // delete adapter;
 
     std::cout << "\n";
     return 0;
